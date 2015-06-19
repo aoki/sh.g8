@@ -7,7 +7,7 @@ function usage() {
 
   Usage:
 
-    ${CMD_PATH} requireArg [options]
+    ${CMD_NAME} requireArg [options]
 
   requireArg:
     foo
