@@ -10,7 +10,7 @@
   error() { printf "\033[${red}m[ERROR] $@\033[m"; }
   warn() { printf "\033[${yellow}m[WARN] $@\033[m"; }
   info() { printf "\033[${blue}m[INFO] $@\033[m"; }
-  success() { printf "\033[${green}m[SUCESS] $@\033[m"; }
+  success() { printf "\033[${green}m[SUCCESS] $@\033[m"; }
   readonly CMD_NAME=$(basename ${0})
   readonly CMD_PATH=$(cd `dirname ${0}` && pwd)
 }
