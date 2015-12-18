@@ -1,8 +1,6 @@
 #!/bin/sh -eu 
 
-####################
-# Initial Process
-####################
+# -- Initial Process
 {
   trap 'cecho $red "$0($LINENO) \"${BASH_COMMAND}\"" ; exit 1' ERR
   readonly red=31; readonly green=32; readonly yellow=33; readonly blue=34
@@ -15,23 +13,20 @@
   readonly CMD_PATH=$(cd `dirname ${0}` && pwd)
 }
 
-####################
-# Usage
-####################
+# -- Usage
 function usage() {
   cat << EOD
 
   Usage:
 
-    command requireArg [options]
+    ${CMD_NAME} arguments [options]
 
-  requireArg:
+  arguments:
     foo
     bar
     baz
 
   options:
-
     --environment, -e : Specify the environment(local, dev, stage and prod)
     --source, -s      : Source file directory
     --destination, -d : File export directory
@@ -40,24 +35,28 @@ EOD
   exit 1
 }
 
-####################
-# Argument process
-####################
-#while [[ $# -gt 0 ]]; do
-#  case ${1} in
-#    --environment|-e)
-#      check_env ${2}
-#      shift;;
-#    --destination|-d)
-#      DESTINATION_DIR=${2}
-#      shift;;
-#    --verbose|-V)
-#      VERBOSE_MODE=true;;
-#    --help|-h)
-#      usage;;
-#    *)
-#      OTHERS_ARGS=${@}
-#      ;;
-#  esac
-#  shift
-#done
+usage
+
+# -- Argument process
+function arguments() {
+  while [[ $# -gt 0 ]]; do
+    case ${1} in
+      --environment|-e)
+        ENVIRONMENT=${2}
+        shift;;
+      --destination|-d)
+        DESTINATION_DIR=${2}
+        shift;;
+      --verbose|-V)
+        VERBOSE_MODE=true;;
+      --help|-h)
+        usage;;
+      *)
+        OTHERS_ARGS=${@}
+        ;;
+    esac
+    shift
+  done
+}
+
+
